@@ -1,13 +1,26 @@
-function findPos(obj) {
-  let curleft = 0, curtop = 0;
-  if (obj.offsetParent) {
-      do {
-          curleft += obj.offsetLeft;
-          curtop += obj.offsetTop;
-      } while (obj = obj.offsetParent);
-      return { x: curleft, y: curtop };
-  }
-  return undefined;
+function activateHistogramButtons(imgInfo, canvasHistogram) {
+  let redButton = document.getElementById("red");
+  let greenButton = document.getElementById("green");
+  let blueButton = document.getElementById("blue");
+  let grayButton = document.getElementById("gray");
+  redButton.addEventListener("click", function(event) {
+    imgInfo.drawHistogram(canvasHistogram, RED);
+  });
+  greenButton.addEventListener("click", function(event) {
+    imgInfo.drawHistogram(canvasHistogram, GREEN);
+  });
+  blueButton.addEventListener("click", function(event) {
+    imgInfo.drawHistogram(canvasHistogram, BLUE);
+  });
+  grayButton.addEventListener("click", function(event) {
+    imgInfo.drawHistogram(canvasHistogram, GRAY);
+  });
+}
+
+function drawAxis(canvas) {
+  const ctx = canvas.getContext('2d');
+  ctx.strokeStyle = "black";
+  ctx.strokeRect(1, 1, 514, 254);
 }
 
 function main(){
@@ -15,10 +28,10 @@ function main(){
 	let canvas = document.getElementById('image');
   let canvasHistogram = document.getElementById('histogram');
 	let context = canvas.getContext("2d");
-  let status = document.getElementById('status');
 	let fileInput = document.getElementById('upload'); // input file
 	let img = new Image();
   let imgInfo;
+  drawAxis(canvasHistogram);
 
 	fileInput.onchange = function(event) {
     let files = event.target.files; // FileList object
@@ -34,7 +47,7 @@ function main(){
             canvas.height = img.height;
             context.drawImage(img,0,0);
             imgInfo = new ImageInfo(canvas, file.type);
-            imgInfo.drawHistogram(canvasHistogram, 0); 
+            activateHistogramButtons(imgInfo, canvasHistogram);
           }
           img.src = event.target.result;
            
@@ -44,17 +57,14 @@ function main(){
       alert("not an image");
     }
   };
-  canvas.addEventListener("mousemove", function(event) {
-    let pos = findPos(this);
-    let x = event.pageX - pos.x;
-    let y = event.pageY - pos.y;
-    let coord = "x=" + x + ", y=" + y;
-    let context = this.getContext('2d');
-    let pixel = context.getImageData(x, y, 1, 1).data;
-    let rgb = `red=${pixel[0]}, green=${pixel[1]}, blue=${pixel[2]}`;
-    status.innerHTML = (coord + ', ' + rgb);
-  });
-  
 }
 
 main();
+
+const acc = document.getElementsByClassName("accordion");
+for (let i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    this.nextElementSibling.classList.toggle("show");
+  });
+}

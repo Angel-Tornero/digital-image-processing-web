@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<link rel="icon" href="https://www.logolynx.com/images/logolynx/73/73353805dc8fca6c030752430c02ebd0.png">
-<!--link rel="stylesheet" type="text/css" href="css/*.css"-->
+<link rel="icon" href="./img/logonormal.png">
+<link rel="stylesheet" type="text/css" href="css/image.css">
 
 <html>
   <head>
@@ -9,13 +9,36 @@
     <title>VPC Web</title>
     <script defer src="js/index.js"></script>
     <script defer src="js/image-info.js"></script>
+    <script>
+      
+    </script>
   </head>
 <body>
-  <input type="file" id="upload">
+  <nav>
+    <button class="accordion">Histograma</button>
+    <div class="panel">
+      <button id="red" style="color:red">RED</button>
+      <button id="green" style="color: green">GREEN</button>
+      <button id="blue" style="color: blue">BLUE</button>
+      <button id="gray" style="color: gray">GRAY</button>
+      <br>
+      <canvas id="histogram" width="516" height="256" style="background-color: white;"></canvas>
+      
+    </div>
+  </nav>
+  <img src="./img/logonormal.png" width="200" height="200">
+  <br>
   
-  <canvas id="image"></canvas>
-  <div id="status"></div>
-  <canvas id="histogram" width="600" height="600"></canvas>
+  <input type="file" id="upload">
+  <br>
+  <canvas id="image" height="400" width="600"></canvas>
+  <footer style="width:100%; margin-left: 0px;"><div id="status" style="font-size: 15px; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Pixel data</div></footer>
+  <br>
+  <br>
+  
+  
+  
+
   
 </body>
 
