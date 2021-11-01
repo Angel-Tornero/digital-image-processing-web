@@ -23,12 +23,34 @@ footer {
 	padding: 0 px;
 }
 
+canvas {
+	margin-left: 15px;
+	border: 1px black;
+	background-color: white;
+}
+
 input {
 	padding: 15px;
 }
 
 img {
 	padding: 15px;
+}
+
+button.color {
+	width: 60px;
+	height: 30px;
+	text-align: center;
+}
+
+button.generate {
+	width: 255px;
+	height: 60px;
+	font-size: 15px;
+	color: rgb(48, 48, 48);
+	background-color: rgb(194, 194, 194);
+	border-color: gray;
+	border-width: 4px;
 }
 
 button.accordion {
@@ -77,10 +99,40 @@ div.panel.show {
 nav {
 	display: block;
 	float: right;
-	margin-top: 28px;
+	margin-top: 0px;
 	width: 570px;
 	box-sizing: border-box;
 	border-left: 1px solid #ccc;
 	padding-left: 16px;
 	text-align: left;
+}
+
+#wrapper {
+	width: 68%;
+	overflow: hidden; /* add this to contain floated children */
+}
+#first {
+	width: 48%;
+	float:left; /* add this */
+	border: 1px solid black;
+}
+#second {
+	width: 48%;
+	border: 1px solid black;
+	float: right; /* add this */
+}
+
+
+#load {
+	margin-top: 15px;
+	margin-left: 15px;
+	margin-bottom: 15px;
+}
+
+h1 {
+	margin-left: 15px;
+	font-size: 25px;
+	font-weight: bolder;
+	margin-bottom: 1rem;
+	font-family:'Courier New', Courier, monospace;
 }

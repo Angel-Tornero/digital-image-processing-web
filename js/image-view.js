@@ -4,7 +4,9 @@
  */
 class ImageView {
   #canvasImage;
+  #canvasOutput;
   #contextCanvasImage;
+  #contextCanvasOutput;
   #contextCanvasHistogram;
   #imgModel;
   /**
@@ -16,6 +18,8 @@ class ImageView {
   constructor(image, canvasImage, canvasHistogram, imgModel) {
     this.#imgModel = imgModel
     this.#canvasImage = canvasImage;
+    this.#canvasOutput = document.getElementById('output');
+    this.#contextCanvasOutput = this.#canvasOutput.getContext('2d');
     this.#contextCanvasImage = canvasImage.getContext('2d');
     this.#contextCanvasHistogram = canvasHistogram.getContext('2d');
     canvasImage.width = image.width;
@@ -30,29 +34,10 @@ class ImageView {
    * @param {Number} color 
    */
    drawHistogram(color) {
-    this.#clearHistogram();
-    let drawingHistogram;
-    switch (color) {
-      case RED:
-        drawingHistogram = this.#imgModel.redHistogram;
-        this.#contextCanvasHistogram.fillStyle = "red";
-        break;
-      case BLUE:
-        drawingHistogram = this.#imgModel.blueHistogram;
-        this.#contextCanvasHistogram.fillStyle = "blue";
-        break;
-      case GREEN:
-        drawingHistogram = this.#imgModel.greenHistogram;
-        this.#contextCanvasHistogram.fillStyle = "green";
-        break;
-      case GRAY:
-        drawingHistogram = this.#imgModel.grayHistogram;
-        this.#contextCanvasHistogram.fillStyle = "gray";
-        break;
-      default:
-        return;
-    }
+    const drawingHistogram = this.#imgModel.histogram[color];
     const transformation = 252 / this.#imgModel.mode[color];
+    this.#clearHistogram();
+    this.#contextCanvasHistogram.fillStyle = color;
     for (let i = 0; i < 256; i++) {
       this.#contextCanvasHistogram.fillRect(2 + i * 2,
         254 - transformation * drawingHistogram[i],
@@ -67,6 +52,19 @@ class ImageView {
   #clearHistogram() {
     this.#contextCanvasHistogram.fillStyle = "white";
     this.#contextCanvasHistogram.fillRect(2, 2, 512, 252);
+  }
+
+  drawOnOutputCanvas(imageData, width, height) {
+    this.#canvasOutput.width = width;
+    this.#canvasOutput.height = height;
+    this.#contextCanvasOutput.putImageData(imageData, 0, 0);
+  }
+
+  drawOnInputCanvas(imageData, width, height) {
+    this.#canvasImage.width = width;
+    this.#canvasImage.height = height;
+    this.#contextCanvasImage.putImageData(imageData, 0, 0);
+    this.#imgModel.calculate();
   }
 
   /**

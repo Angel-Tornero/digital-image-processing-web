@@ -17,25 +17,50 @@
     </script>
   </head>
 <body>
+  <img src="./img/logonormal.png" width="150" height="150">
+  <br>
   <nav>
     <button class="accordion">Histograma</button>
     <div class="panel">
-      <button id="red" style="color:red">RED</button>
-      <button id="green" style="color: green">GREEN</button>
-      <button id="blue" style="color: blue">BLUE</button>
-      <button id="gray" style="color: gray">GRAY</button>
       <br>
+      <button class="color" id="redHistogram" style="color:red">RED</button>
+      <button class="color" id="greenHistogram" style="color: green">GREEN</button>
+      <button class="color" id="blueHistogram" style="color: blue">BLUE</button>
+      <button class="color" id="grayHistogram" style="color: gray">GRAY</button>
+      <br><br>
       <canvas id="histogram" width="516" height="256" style="background-color: white;"></canvas>
+      <br><br>
+    </div>
+    <button class="accordion">Generar versión monocromática</button>
+    <div class="panel">
+      <br>
+      <button class="color" id="redMono" style="color:red">RED</button>
+      <button class="color" id="greenMono" style="color: green">GREEN</button>
+      <button class="color" id="blueMono" style="color: blue">BLUE</button>
+      <button class="color" id="grayMono" style="color: gray">GRAY</button>
       
+      <br><br>
+      <button class="generate" id="generate">GENERAR ⚙️</button>
+      <br><br>
     </div>
   </nav>
-  <img src="./img/logonormal.png" width="200" height="200">
-  <br>
-  
-  <input type="file" id="upload">
-  <br>
-  <canvas id="image" height="400" width="600"></canvas>
-  <footer style="width:100%; margin-left: 0px;"><div id="status" style="font-size: 15px; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Pixel data</div></footer>
+  <div id="wrapper">
+    <div id="first" >
+      <h1>Imagen de entrada</h1>
+      <br>
+      <canvas id="image" height="400" width="400"></canvas>
+      <input type="file" id="upload">
+    </div>
+    <div id="second">
+      <h1>Imagen de salida</h1>
+      <br>
+      <canvas id="output" height="400" width="400"></canvas>
+      <br>
+      <button id="load">Utilizar como imagen de entrada</button>
+    </div>
+  </div>
+  <footer style="width:50%; margin-left: 0px;"><div id="status" style="font-size: 15px; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Input image data</div></footer>
+  <footer style="text-align:right;width:50%; margin-left: 50%;"><div id="status2" style="font-size: 15px; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Output image data</div></footer>
   <br>
   <br>
   
