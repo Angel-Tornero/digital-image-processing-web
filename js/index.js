@@ -17,46 +17,8 @@ function activateHistogramButtons(imgInfo, canvasHistogram) {
   });
 }
 
-function drawAxis(canvas) {
-  const ctx = canvas.getContext('2d');
-  ctx.strokeStyle = "black";
-  ctx.strokeRect(1, 1, 514, 254);
-}
-
 function main(){
-	// canvas
-	let canvas = document.getElementById('image');
-  let canvasHistogram = document.getElementById('histogram');
-	let context = canvas.getContext("2d");
-	let fileInput = document.getElementById('upload'); // input file
-	let img = new Image();
-  let imgInfo;
-  drawAxis(canvasHistogram);
-
-	fileInput.onchange = function(event) {
-    let files = event.target.files; // FileList object
-    let file = files[0];
-    if (file.type.match('image.*')) {
-      let reader = new FileReader();
-      // Read in the image file as a data URL.
-      reader.readAsDataURL(file);
-      reader.onload = function(event) {
-        if(event.target.readyState == FileReader.DONE) {
-          img.onload = function() {
-            canvas.width = img.width;
-            canvas.height = img.height;
-            context.drawImage(img,0,0);
-            imgInfo = new ImageInfo(canvas, file.type);
-            activateHistogramButtons(imgInfo, canvasHistogram);
-          }
-          img.src = event.target.result;
-           
-        }
-      }    
-    } else {
-      alert("not an image");
-    }
-  };
+  const imgController = new ImageController();
 }
 
 main();
